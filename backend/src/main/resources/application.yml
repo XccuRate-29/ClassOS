@@ -1,0 +1,86 @@
+spring:
+  application:
+    name: classos-backend
+  # Reads the repo-root .env (same file docker compose uses) when started from backend/.
+  # Real environment variables still take precedence.
+  config:
+    import: optional:file:../.env[.properties]
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/classos}
+    username: ${DB_USER:classos}
+    password: ${DB_PASSWORD}
+    hikari:
+      # The attendance burst is the busiest moment: every mark holds a connection briefly.
+      # PostgreSQL allows 100 connections by default; leave room for other clients.
+      maximum-pool-size: ${DB_POOL_SIZE:20}
+      connection-timeout: 10000
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate          # Flyway owns the schema; Hibernate only checks it
+    properties:
+      hibernate:
+        jdbc:
+          time_zone: UTC
+  flyway:
+    enabled: true
+  servlet:
+    multipart:
+      max-file-size: ${MAX_UPLOAD_MB:20}MB
+      max-request-size: 30MB
+
+server:
+  port: ${SERVER_PORT:8080}
+  shutdown: graceful                    # finish in-flight requests (e.g. attendance marks) before stopping
+  compression:
+    enabled: true
+    mime-types: application/json
+    min-response-size: 2048
+  # Behind nginx (docker compose "full" profile) set this to "native" so the client IP
+  # used by the attendance network check is the student's, not the proxy's.
+  forward-headers-strategy: ${FORWARD_HEADERS_STRATEGY:none}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+  endpoint:
+    health:
+      show-components: always           # db / solver status, without internal details
+      show-details: never
+
+classos:
+  security:
+    jwt-secret: ${JWT_SECRET}                  # base64, at least 32 random bytes
+    jwt-ttl-minutes: ${JWT_TTL_MINUTES:60}
+    cors-allowed-origins: ${CORS_ALLOWED_ORIGINS:http://localhost:5173}
+  bootstrap:
+    admin-email: ${ADMIN_EMAIL:}
+    admin-password: ${ADMIN_PASSWORD:}
+    admin-name: ${ADMIN_NAME:ClassOS Administrator}
+  solver:
+    url: ${SOLVER_URL:http://localhost:7070}
+    read-timeout-seconds: ${SOLVER_READ_TIMEOUT_SECONDS:40}
+    time-limit-ms: ${SOLVER_TIME_LIMIT_MS:10000}
+  dev-seed:
+    enabled: ${DEV_SEED_ENABLED:false}
+    password: ${DEV_SEED_PASSWORD:}
+  attendance:
+    secret: ${ATTENDANCE_SECRET}                      # base64, 32+ random bytes; NOT the JWT secret
+    window-seconds: ${ATTENDANCE_WINDOW_SECONDS:10}   # code rotates this often
+    session-minutes: ${ATTENDANCE_SESSION_MINUTES:15} # marking closes automatically after this
+    max-failed-attempts: ${ATTENDANCE_MAX_FAILED_ATTEMPTS:5}
+    allowed-cidrs: ${ATTENDANCE_ALLOWED_CIDRS:}       # e.g. 10.20.0.0/16 (campus Wi-Fi); empty = off
+    minimum-percent: ${ATTENDANCE_MINIMUM_PERCENT:75}
+  storage:
+    dir: ${STORAGE_DIR:./data/files}      # relative to where the backend is started
+    max-upload-mb: ${MAX_UPLOAD_MB:20}
+  grading:
+    aging-per-hour: ${GRADING_AGING_PER_HOUR:0.25}   # priority points gained per hour waited
+    priority-step: 10                               # points between high, normal and low
+    quantum: ${GRADING_QUANTUM:3}                    # Round Robin: submissions per assignment per turn
+  login-limits:
+    window-minutes: 15
+    max-per-account: ${LOGIN_MAX_FAILURES_PER_ACCOUNT:5}
+    max-per-address: ${LOGIN_MAX_FAILURES_PER_ADDRESS:30}

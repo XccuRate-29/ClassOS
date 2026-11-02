@@ -1,0 +1,68 @@
+# Development (default): only the database and the C++ service; run the backend and
+# frontend yourself (mvnw / npm run dev).
+#   docker compose up -d --build
+#
+# Full stack, for integration testing, load testing and the user trial:
+#   docker compose --profile full up -d --build      ->  http://localhost:8088
+services:
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: classos
+      POSTGRES_USER: classos
+      POSTGRES_PASSWORD: ${DB_PASSWORD:?Set DB_PASSWORD in .env}
+    ports:
+      - "127.0.0.1:5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U classos -d classos"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  # C++ timetable solver and grading scheduler. No authentication: never publish it beyond localhost.
+  solver:
+    build: ./core
+    ports:
+      - "127.0.0.1:7070:7070"
+    healthcheck:
+      test: ["CMD-SHELL", "timeout 2 bash -c '</dev/tcp/127.0.0.1/7070' || exit 1"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+
+  backend:
+    profiles: ["full"]
+    build: ./backend
+    env_file: .env
+    environment:
+      DB_URL: jdbc:postgresql://db:5432/classos
+      SOLVER_URL: http://solver:7070
+      FORWARD_HEADERS_STRATEGY: native   # trust X-Forwarded-For from nginx on the private network
+    depends_on:
+      db:
+        condition: service_healthy
+      solver:
+        condition: service_started
+    volumes:
+      - files:/app/data/files
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fs http://127.0.0.1:8080/actuator/health | grep -q UP || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 40s
+
+  web:
+    profiles: ["full"]
+    build: ./frontend
+    ports:
+      - "8088:80"      # reachable from phones on the same network: http://<this-machine's-IP>:8088
+    depends_on:
+      backend:
+        condition: service_healthy
+
+volumes:
+  pgdata:
+  files:

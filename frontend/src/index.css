@@ -1,0 +1,46 @@
+@import "tailwindcss";
+
+/* Design tokens. Atkinson Hyperlegible was designed for legibility, which suits
+   a tool students read on phones in bright classrooms. The highlighter yellow is
+   the one accent: it marks "you are here" (active nav, focus), like a student
+   highlighting their own row of a printed timetable. */
+@theme {
+  --font-sans: "Atkinson Hyperlegible", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --color-ink: #1b2430;
+  --color-muted: #55606c;
+  --color-paper: #f4f6f5;
+  --color-line: #d5dcd9;
+  --color-board: #2f4a43;
+  --color-board-deep: #233832;
+  --color-highlight: #f2c94c;
+  --color-danger: #b3261e;
+  --color-ok: #2e6b3f;
+}
+
+body {
+  @apply bg-paper text-ink font-sans antialiased;
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-highlight);
+  outline-offset: 2px;
+}
+
+/* Faint weekly-timetable grid used behind the login panel. */
+.timetable-grid {
+  background-image:
+    linear-gradient(to right, rgb(255 255 255 / 0.08) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(255 255 255 / 0.08) 1px, transparent 1px);
+  background-size: 4.5rem 2.25rem;
+}
+
+/* Highlighter stroke under the wordmark. */
+.highlighter {
+  background-image: linear-gradient(transparent 58%, var(--color-highlight) 58%, var(--color-highlight) 92%, transparent 92%);
+  color: var(--color-ink);
+  padding: 0 0.15em;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}

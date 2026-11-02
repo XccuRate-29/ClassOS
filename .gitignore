@@ -1,0 +1,25 @@
+# Secrets
+.env
+
+# Java
+backend/target/
+
+# Uploaded files (never commit students' work)
+backend/data/
+data/
+*.class
+
+# C++
+core/build/
+build/
+
+# Node (frontend, next milestone)
+node_modules/
+frontend/dist/
+
+# IDEs / OS
+.idea/
+.vscode/
+*.iml
+.DS_Store
+Thumbs.db

@@ -1,0 +1,55 @@
+# Runs every test suite on each push and pull request. A red build blocks merging
+# (set "require status checks" on the main branch in GitHub).
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  core:
+    name: C++ core
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: sudo apt-get update && sudo apt-get install -y cmake ninja-build
+      - name: Build and test (with the HTTP service)
+        working-directory: core
+        run: |
+          cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Release
+          cmake --build build
+          ctest --test-dir build --output-on-failure
+      - name: Data-race check (ThreadSanitizer)
+        working-directory: core
+        run: |
+          cmake -S . -B build-tsan -G Ninja -DCLASSOS_TSAN=ON -DCLASSOS_BUILD_SERVER=OFF
+          cmake --build build-tsan
+          ctest --test-dir build-tsan --output-on-failure
+
+  backend:
+    name: Java backend
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "25"
+          cache: maven
+      - name: Test (Testcontainers starts PostgreSQL in Docker)
+        working-directory: backend
+        run: mvn -B test
+
+  frontend:
+    name: React frontend
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - working-directory: frontend
+        run: |
+          if [ -f package-lock.json ]; then npm ci; else npm install; fi
+          npm run build
