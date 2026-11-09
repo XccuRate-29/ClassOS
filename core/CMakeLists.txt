@@ -7,6 +7,17 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 find_package(Threads REQUIRED)
 
+# MinGW's default thread model is not reliable for std::thread support in older
+# toolchains. Fail early with a clear message instead of the cryptic
+# std::mutex/condition_variable errors that appear during compile.
+if(MINGW)
+    if(CMAKE_CXX_COMPILER_VERSION VERSION_LESS 8.0)
+        message(FATAL_ERROR "ClassOS requires a modern MinGW-w64/GCC 8+ toolchain or a Linux/WSL environment; the current MinGW install does not provide reliable std::thread support.")
+    endif()
+    add_compile_options(-mthreads)
+    add_link_options(-mthreads)
+endif()
+
 # Optional: build with ThreadSanitizer to detect data races (Linux/WSL, GCC/Clang).
 # Must come before targets are defined, because these options apply to targets created afterwards.
 option(CLASSOS_TSAN "Build with ThreadSanitizer" OFF)

@@ -24,7 +24,8 @@
 #include <cstdint>
 #include <vector>
 
-namespace classos::scheduling {
+namespace classos {
+namespace scheduling {
 
 enum class Policy { FCFS, Priority, RoundRobin };
 
@@ -69,4 +70,5 @@ Schedule run(Policy policy, const std::vector<Job>& jobs, const Params& params);
 
 const char* name(Policy policy);
 
-}  // namespace classos::scheduling
+}  // namespace scheduling
+}  // namespace classos

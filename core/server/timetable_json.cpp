@@ -3,7 +3,8 @@
 #include <algorithm>
 #include <stdexcept>
 
-namespace classos::timetable {
+namespace classos {
+namespace timetable {
 
 namespace {
 
@@ -28,8 +29,18 @@ Problem problem_from_json(const nlohmann::json& j) {
     p.periods_per_day = j.at("periodsPerDay").get<int>();
     p.break_after = j.value("breakAfter", std::vector<int>{});
     // Callers cannot ask for unbounded work.
-    p.time_limit = std::chrono::milliseconds(std::clamp(j.value("timeLimitMs", 5000), 100, 30000));
-    p.node_limit = std::clamp<std::int64_t>(j.value("nodeLimit", std::int64_t{2'000'000}), 1, 20'000'000);
+    {
+        int time_limit_ms = j.value("timeLimitMs", 5000);
+        if (time_limit_ms < 100) time_limit_ms = 100;
+        if (time_limit_ms > 30000) time_limit_ms = 30000;
+        p.time_limit = std::chrono::milliseconds(time_limit_ms);
+    }
+    {
+        std::int64_t node_limit = j.value("nodeLimit", std::int64_t{2000000});
+        if (node_limit < 1) node_limit = 1;
+        if (node_limit > 20000000) node_limit = 20000000;
+        p.node_limit = node_limit;
+    }
     const std::string order = j.value("variableOrder", std::string("MRV"));
     if (order == "INPUT") p.order = VariableOrder::InputOrder;
     else if (order != "MRV") throw std::invalid_argument("variableOrder must be MRV or INPUT");
@@ -79,4 +90,5 @@ nlohmann::json solution_to_json(const Problem& problem, const Solution& s) {
     };
 }
 
-}  // namespace classos::timetable
+}  // namespace timetable
+}  // namespace classos

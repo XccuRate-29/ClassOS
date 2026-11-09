@@ -1,0 +1,17 @@
+# ninja log v5
+36	4260	8159578168615130	CMakeFiles/classos_core.dir/src/bankers.cpp.obj	75085c8a62dda97c
+318	4273	8159578168773069	CMakeFiles/classos_bench.dir/tools/bench.cpp.obj	8525666e06382700
+273	5003	8159578176113236	CMakeFiles/test_scheduler.dir/tests/test_scheduler.cpp.obj	ccd1daa9b1731d38
+123	5104	8159578177094875	CMakeFiles/test_bankers.dir/tests/test_bankers.cpp.obj	f23735a8e89921f9
+224	5421	8159578180307653	CMakeFiles/test_timetable.dir/tests/test_timetable.cpp.obj	f6a25012dd065402
+167	5684	8159578182941281	CMakeFiles/classos_core.dir/src/scheduler.cpp.obj	5cab9ff785d12e25
+77	8719	8159578213259699	CMakeFiles/classos_core.dir/src/timetable.cpp.obj	cade66eff2dfb071
+3	10522	8159578231240190	CMakeFiles/classos_solver_server.dir/server/scheduler_json.cpp.obj	571c5d2863c9cd3d
+8721	10590	8159578232052316	libclassos_core.a	34e893c1e3f45cc6
+10650	11686	8159578242723925	classos_bench.exe	163cd3f57d785b50
+10591	12069	8159578246448284	test_bankers.exe	c8f035cd3b1decf
+10630	12084	8159578246498256	test_scheduler.exe	e710ea0a8b895f7d
+375	12117	8159578247166395	CMakeFiles/classos_solver_server.dir/server/timetable_json.cpp.obj	482370ed159b4221
+10610	12163	8159578247380045	test_timetable.exe	8bfdf9f5c88aee3f
+436	33378	8159578459445694	CMakeFiles/classos_solver_server.dir/server/main.cpp.obj	c871796223e32134
+33386	35628	8159578481728731	classos_solver_server.exe	91391a33b240b1d0

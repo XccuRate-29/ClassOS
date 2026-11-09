@@ -1,0 +1,14 @@
+# Target labels
+ httplib-populate
+# Source files and their labels
+C:/Codes/ClassOS/core/build-gcc15/_deps/httplib-subbuild/CMakeFiles/httplib-populate
+C:/Codes/ClassOS/core/build-gcc15/_deps/httplib-subbuild/CMakeFiles/httplib-populate.rule
+C:/Codes/ClassOS/core/build-gcc15/_deps/httplib-subbuild/CMakeFiles/httplib-populate-complete.rule
+C:/Codes/ClassOS/core/build-gcc15/_deps/httplib-subbuild/httplib-populate-prefix/src/httplib-populate-stamp/httplib-populate-build.rule
+C:/Codes/ClassOS/core/build-gcc15/_deps/httplib-subbuild/httplib-populate-prefix/src/httplib-populate-stamp/httplib-populate-configure.rule
+C:/Codes/ClassOS/core/build-gcc15/_deps/httplib-subbuild/httplib-populate-prefix/src/httplib-populate-stamp/httplib-populate-download.rule
+C:/Codes/ClassOS/core/build-gcc15/_deps/httplib-subbuild/httplib-populate-prefix/src/httplib-populate-stamp/httplib-populate-install.rule
+C:/Codes/ClassOS/core/build-gcc15/_deps/httplib-subbuild/httplib-populate-prefix/src/httplib-populate-stamp/httplib-populate-mkdir.rule
+C:/Codes/ClassOS/core/build-gcc15/_deps/httplib-subbuild/httplib-populate-prefix/src/httplib-populate-stamp/httplib-populate-patch.rule
+C:/Codes/ClassOS/core/build-gcc15/_deps/httplib-subbuild/httplib-populate-prefix/src/httplib-populate-stamp/httplib-populate-test.rule
+C:/Codes/ClassOS/core/build-gcc15/_deps/httplib-subbuild/httplib-populate-prefix/src/httplib-populate-stamp/httplib-populate-update.rule

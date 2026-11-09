@@ -1,0 +1,14 @@
+# Target labels
+ json-populate
+# Source files and their labels
+C:/Codes/ClassOS/core/build-gcc15/_deps/json-subbuild/CMakeFiles/json-populate
+C:/Codes/ClassOS/core/build-gcc15/_deps/json-subbuild/CMakeFiles/json-populate.rule
+C:/Codes/ClassOS/core/build-gcc15/_deps/json-subbuild/CMakeFiles/json-populate-complete.rule
+C:/Codes/ClassOS/core/build-gcc15/_deps/json-subbuild/json-populate-prefix/src/json-populate-stamp/json-populate-build.rule
+C:/Codes/ClassOS/core/build-gcc15/_deps/json-subbuild/json-populate-prefix/src/json-populate-stamp/json-populate-configure.rule
+C:/Codes/ClassOS/core/build-gcc15/_deps/json-subbuild/json-populate-prefix/src/json-populate-stamp/json-populate-download.rule
+C:/Codes/ClassOS/core/build-gcc15/_deps/json-subbuild/json-populate-prefix/src/json-populate-stamp/json-populate-install.rule
+C:/Codes/ClassOS/core/build-gcc15/_deps/json-subbuild/json-populate-prefix/src/json-populate-stamp/json-populate-mkdir.rule
+C:/Codes/ClassOS/core/build-gcc15/_deps/json-subbuild/json-populate-prefix/src/json-populate-stamp/json-populate-patch.rule
+C:/Codes/ClassOS/core/build-gcc15/_deps/json-subbuild/json-populate-prefix/src/json-populate-stamp/json-populate-test.rule
+C:/Codes/ClassOS/core/build-gcc15/_deps/json-subbuild/json-populate-prefix/src/json-populate-stamp/json-populate-update.rule

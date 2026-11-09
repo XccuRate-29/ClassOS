@@ -153,10 +153,10 @@ bool BankersAllocator::is_safe_state() const {
     return safe_locked(nullptr);
 }
 
-std::optional<std::vector<std::size_t>> BankersAllocator::safe_sequence() const {
+std::vector<std::size_t> BankersAllocator::safe_sequence() const {
     std::lock_guard<std::mutex> lock(mu_);
     std::vector<std::size_t> seq;
-    if (!safe_locked(&seq)) return std::nullopt;
+    if (!safe_locked(&seq)) return std::vector<std::size_t>();
     return seq;
 }
 

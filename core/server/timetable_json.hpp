@@ -5,9 +5,11 @@
 
 #include "classos/timetable.hpp"
 
-namespace classos::timetable {
+namespace classos {
+namespace timetable {
 
 Problem problem_from_json(const nlohmann::json& j);
 nlohmann::json solution_to_json(const Problem& problem, const Solution& solution);
 
-}  // namespace classos::timetable
+}  // namespace timetable
+}  // namespace classos

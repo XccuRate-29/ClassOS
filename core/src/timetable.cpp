@@ -8,7 +8,8 @@
 #include <tuple>
 #include <unordered_map>
 
-namespace classos::timetable {
+namespace classos {
+namespace timetable {
 
 namespace {
 
@@ -136,17 +137,25 @@ private:
         for (const Busy& b : p_.fixed) {
             for (int k = 0; k < b.length; ++k) {
                 int slot = (b.day - 1) * P_ + (b.start_period - 1) + k;
-                if (auto it = room_index_.find(b.room_id); b.room_id && it != room_index_.end())
-                    ++room_busy_[it->second][slot];
-                if (auto it = teacher_index_.find(b.teacher_id); b.teacher_id && it != teacher_index_.end())
-                    ++teacher_busy_[it->second][slot];
-                if (auto it = section_index_.find(b.section_id); b.section_id && it != section_index_.end())
-                    ++section_busy_[it->second][slot];
+                if (b.room_id) {
+                    std::unordered_map<std::int64_t, int>::iterator room_it = room_index_.find(b.room_id);
+                    if (room_it != room_index_.end()) ++room_busy_[room_it->second][slot];
+                }
+                if (b.teacher_id) {
+                    std::unordered_map<std::int64_t, int>::iterator teacher_it = teacher_index_.find(b.teacher_id);
+                    if (teacher_it != teacher_index_.end()) ++teacher_busy_[teacher_it->second][slot];
+                }
+                if (b.section_id) {
+                    std::unordered_map<std::int64_t, int>::iterator section_it = section_index_.find(b.section_id);
+                    if (section_it != section_index_.end()) ++section_busy_[section_it->second][slot];
+                }
             }
         }
-        for (const Unavailable& u : p_.teacher_unavailable)
-            if (auto it = teacher_index_.find(u.teacher_id); it != teacher_index_.end())
+        for (const Unavailable& u : p_.teacher_unavailable) {
+            std::unordered_map<std::int64_t, int>::iterator it = teacher_index_.find(u.teacher_id);
+            if (it != teacher_index_.end())
                 teacher_unavailable_[it->second][(u.day - 1) * P_ + (u.period - 1)] = 1;
+        }
     }
 
     bool block_crosses_break(int start, int length) const {
@@ -438,4 +447,5 @@ std::vector<std::string> validate(const Problem& p, const std::vector<Placement>
     return v;
 }
 
-}  // namespace classos::timetable
+}  // namespace timetable
+}  // namespace classos

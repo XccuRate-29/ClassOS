@@ -1,0 +1,3 @@
+C:/Codes/ClassOS/core/build-gcc15/_deps/json-subbuild/CMakeFiles/json-populate.dir
+C:/Codes/ClassOS/core/build-gcc15/_deps/json-subbuild/CMakeFiles/edit_cache.dir
+C:/Codes/ClassOS/core/build-gcc15/_deps/json-subbuild/CMakeFiles/rebuild_cache.dir

@@ -5,7 +5,8 @@
 
 #include "classos/scheduler.hpp"
 
-namespace classos::scheduling {
+namespace classos {
+namespace scheduling {
 
 namespace {
 
@@ -24,7 +25,9 @@ nlohmann::json schedule_from_json(const nlohmann::json& j) {
         const auto& pj = j.at("params");
         p.aging_per_hour = pj.value("agingPerHour", p.aging_per_hour);
         p.priority_step = pj.value("priorityStep", p.priority_step);
-        p.quantum = std::clamp(pj.value("quantum", p.quantum), 1, 100);
+        p.quantum = pj.value("quantum", p.quantum);
+        if (p.quantum < 1) p.quantum = 1;
+        if (p.quantum > 100) p.quantum = 100;
         p.start = pj.value("start", p.start);
     }
     std::vector<Job> jobs;
@@ -54,4 +57,5 @@ nlohmann::json schedule_from_json(const nlohmann::json& j) {
     return nlohmann::json{{"results", results}};
 }
 
-}  // namespace classos::scheduling
+}  // namespace scheduling
+}  // namespace classos

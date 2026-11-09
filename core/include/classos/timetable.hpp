@@ -26,7 +26,8 @@
 #include <string>
 #include <vector>
 
-namespace classos::timetable {
+namespace classos {
+namespace timetable {
 
 enum class RoomType { Classroom, Lab, SeminarHall };
 enum class EventKind { Lecture, Lab };
@@ -114,4 +115,5 @@ Solution solve(const Problem& problem);
 // Returns human-readable violations; empty means the placements are valid.
 std::vector<std::string> validate(const Problem& problem, const std::vector<Placement>& placements);
 
-}  // namespace classos::timetable
+}  // namespace timetable
+}  // namespace classos

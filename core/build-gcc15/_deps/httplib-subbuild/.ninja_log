@@ -1,0 +1,21 @@
+# ninja log v5
+2	217	8159578011549752	httplib-populate-prefix/src/httplib-populate-stamp/httplib-populate-mkdir	2f191b2b549a4148
+2	217	8159578011549752	C:/Codes/ClassOS/core/build-gcc15/_deps/httplib-subbuild/httplib-populate-prefix/src/httplib-populate-stamp/httplib-populate-mkdir	2f191b2b549a4148
+218	3616	8159578045546461	httplib-populate-prefix/src/httplib-populate-stamp/httplib-populate-download	3f035b4cc0f5061a
+218	3616	8159578045546461	C:/Codes/ClassOS/core/build-gcc15/_deps/httplib-subbuild/httplib-populate-prefix/src/httplib-populate-stamp/httplib-populate-download	3f035b4cc0f5061a
+3617	3810	8159578047477709	httplib-populate-prefix/src/httplib-populate-stamp/httplib-populate-update	c748aaa7f2a89087
+3617	3810	8159578047477709	C:/Codes/ClassOS/core/build-gcc15/_deps/httplib-subbuild/httplib-populate-prefix/src/httplib-populate-stamp/httplib-populate-update	c748aaa7f2a89087
+3811	4010	8159578049472566	httplib-populate-prefix/src/httplib-populate-stamp/httplib-populate-patch	7976c3907ba0a369
+3811	4010	8159578049472566	C:/Codes/ClassOS/core/build-gcc15/_deps/httplib-subbuild/httplib-populate-prefix/src/httplib-populate-stamp/httplib-populate-patch	7976c3907ba0a369
+4010	4205	8159578051434912	httplib-populate-prefix/src/httplib-populate-stamp/httplib-populate-configure	e6e9602bf7354166
+4010	4205	8159578051434912	C:/Codes/ClassOS/core/build-gcc15/_deps/httplib-subbuild/httplib-populate-prefix/src/httplib-populate-stamp/httplib-populate-configure	e6e9602bf7354166
+4206	4414	8159578053516201	httplib-populate-prefix/src/httplib-populate-stamp/httplib-populate-build	8fc5b7cc5dfadfec
+4206	4414	8159578053516201	C:/Codes/ClassOS/core/build-gcc15/_deps/httplib-subbuild/httplib-populate-prefix/src/httplib-populate-stamp/httplib-populate-build	8fc5b7cc5dfadfec
+4415	4627	8159578055651032	httplib-populate-prefix/src/httplib-populate-stamp/httplib-populate-install	bac39940987b85c0
+4415	4627	8159578055651032	C:/Codes/ClassOS/core/build-gcc15/_deps/httplib-subbuild/httplib-populate-prefix/src/httplib-populate-stamp/httplib-populate-install	bac39940987b85c0
+4628	4823	8159578057622925	httplib-populate-prefix/src/httplib-populate-stamp/httplib-populate-test	a57858e24df94253
+4628	4823	8159578057622925	C:/Codes/ClassOS/core/build-gcc15/_deps/httplib-subbuild/httplib-populate-prefix/src/httplib-populate-stamp/httplib-populate-test	a57858e24df94253
+4824	5229	8159578061463207	CMakeFiles/httplib-populate-complete	6e02355636fc6b52
+4824	5229	8159578061463207	httplib-populate-prefix/src/httplib-populate-stamp/httplib-populate-done	6e02355636fc6b52
+4824	5229	8159578061463207	C:/Codes/ClassOS/core/build-gcc15/_deps/httplib-subbuild/CMakeFiles/httplib-populate-complete	6e02355636fc6b52
+4824	5229	8159578061463207	C:/Codes/ClassOS/core/build-gcc15/_deps/httplib-subbuild/httplib-populate-prefix/src/httplib-populate-stamp/httplib-populate-done	6e02355636fc6b52

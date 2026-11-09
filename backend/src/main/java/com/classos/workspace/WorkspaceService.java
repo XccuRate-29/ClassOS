@@ -79,8 +79,8 @@ public class WorkspaceService {
                 JOIN courses c ON c.id = o.course_id
                 JOIN sections s ON s.id = o.section_id
                 JOIN users t ON t.id = o.teacher_id
-                JOIN academic_terms term ON term.id = o.term_id
-                WHERE """ + who + scope + " ORDER BY s.name, c.code",
+                JOIN academic_terms term ON term.id = o.term_id"""
+                + " WHERE " + who + scope + " ORDER BY s.name, c.code",
                 (rs, i) -> new CourseCard(rs.getLong(1), rs.getString(2), rs.getString(3), rs.getString(4),
                         rs.getString(5), rs.getInt(6), rs.getInt(7),
                         u.role() == Role.STUDENT ? 0 : rs.getInt(8),

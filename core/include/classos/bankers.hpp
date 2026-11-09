@@ -17,7 +17,6 @@
 #include <condition_variable>
 #include <cstddef>
 #include <mutex>
-#include <optional>
 #include <string>
 #include <vector>
 
@@ -58,7 +57,7 @@ public:
     void release_all(std::size_t client);  // session ended
 
     bool is_safe_state() const;
-    std::optional<std::vector<std::size_t>> safe_sequence() const;
+    std::vector<std::size_t> safe_sequence() const;
     std::vector<int> available() const;
     std::vector<int> allocation_of(std::size_t client) const;
 

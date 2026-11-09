@@ -1,0 +1,7 @@
+{
+	"InstallScripts" : 
+	[
+		"C:/Codes/ClassOS/core/build-gcc15/_deps/json-subbuild/cmake_install.cmake"
+	],
+	"Parallel" : false
+}

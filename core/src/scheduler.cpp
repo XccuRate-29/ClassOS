@@ -8,7 +8,8 @@
 #include <set>
 #include <stdexcept>
 
-namespace classos::scheduling {
+namespace classos {
+namespace scheduling {
 
 const char* name(Policy policy) {
     switch (policy) {
@@ -61,8 +62,9 @@ Metrics measure(const std::vector<Job>& jobs, const std::vector<Slot>& order) {
     // Jain's fairness index over each assignment's average wait: (sum x)^2 / (n * sum x^2).
     // 1 = every class waits equally long for its grades.
     double sum = 0, sumSq = 0;
-    for (auto& [queue, q] : perQueue) {
-        double avg = q.first / q.second;
+    std::map<std::int64_t, std::pair<double, int> >::iterator it = perQueue.begin();
+    for (; it != perQueue.end(); ++it) {
+        const double avg = it->second.first / static_cast<double>(it->second.second);
         sum += avg;
         sumSq += avg * avg;
     }
@@ -144,7 +146,10 @@ Schedule run(Policy policy, const std::vector<Job>& jobs, const Params& p) {
                 }
                 if (!progressed) {  // nothing has arrived yet: idle until the next submission
                     double next = std::numeric_limits<double>::infinity();
-                    for (auto& [q, fifo] : queues) if (!fifo.empty()) next = std::min(next, jobs[fifo.front()].arrival);
+                    std::map<std::int64_t, std::deque<int> >::iterator it = queues.begin();
+                    for (; it != queues.end(); ++it) {
+                        if (!it->second.empty()) next = std::min(next, jobs[it->second.front()].arrival);
+                    }
                     t = next;
                 }
             }
@@ -156,4 +161,5 @@ Schedule run(Policy policy, const std::vector<Job>& jobs, const Params& p) {
     return s;
 }
 
-}  // namespace classos::scheduling
+}  // namespace scheduling
+}  // namespace classos
